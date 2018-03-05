@@ -7,23 +7,23 @@
 
 sum(1)(2)(3)....(n)() === 1 + 2 + 3 + ... + n
 
-*/
+ */
 
 function sum(x) {
-var buff = 0;
+	var buff = 0;
 
-function f( x ){
-if(x) {
-buff += x;
-return f;
+	function f(x) {
+		if (x) {
+			buff += x;
+			return f;
 
-   } else {
-	   return buff;
-   }
+		} else {
+			return buff;
+		}
+	}
+
+	return f(x);
 }
 
-return f(x);
-}
-
-console.log( sum(1)(2)(4)(2)(4)(2)(4)());
-console.log( Sum(1)(22)(4)(2)(4)(2)(4)());
+console.log(sum(1)(2)(4)(2)(4)(2)(4)());
+console.log(Sum(1)(22)(4)(2)(4)(2)(4)());

@@ -1,36 +1,38 @@
-/*
-Написать polyfill для функции Object.create.
-Согласно Mozilla.org
-Object.create(proto --- прототип
-[, propertiesObject] --- расширение объекта
+п»ї/*
+РќР°РїРёСЃР°С‚СЊ polyfill РґР»СЏ С„СѓРЅРєС†РёРё Object.create.
+РЎРѕРіР»Р°СЃРЅРѕ Mozilla.org
+Object.create(proto --- РїСЂРѕС‚РѕС‚РёРї
+[, propertiesObject] --- СЂР°СЃС€РёСЂРµРЅРёРµ РѕР±СЉРµРєС‚Р°
 )
-*/
-const newObject = function(Obj, extProp) {
-// Создадим конструктор
-const Temp = function() {};
+ */
+const newObject = function (Obj, extProp) {
+	// РЎРѕР·РґР°РґРёРј РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
+	const Temp = function () {};
 
-//  цитируем  системный функционал Object.prototype.hasOwnProperty
-var hasOwn = Object.prototype.hasOwnProperty;
-// 1. Проверяем, что первый аргумент
-if (typeof Obj != 'object') {
-throw TypeError('Object prototype may only be an Object or null');
-}
-//console.log( Obj, typeof Obj);
-var obj = {};
-obj.proto = Obj; // Создаем новый объект на основе Obj
-//console.log( obj);
-// Обрабатываем наличие заданных расширений объекта, при их наличии
-if ( extProp|| 1 !== 1) {
-var Properties = Object(extProp);
-for (var prop in Properties) {
-if (hasOwn.call(Properties, prop)) {
-obj[prop] = Properties[prop];
-}
-}
-}
-return obj;
+	//  С†РёС‚РёСЂСѓРµРј  СЃРёСЃС‚РµРјРЅС‹Р№ С„СѓРЅРєС†РёРѕРЅР°Р» Object.prototype.hasOwnProperty
+	var hasOwn = Object.prototype.hasOwnProperty;
+	// 1. РџСЂРѕРІРµСЂСЏРµРј, С‡С‚Рѕ РїРµСЂРІС‹Р№ Р°СЂРіСѓРјРµРЅС‚
+	if (typeof Obj != 'object') {
+		throw TypeError('Object prototype may only be an Object or null');
+	}
+	//console.log( Obj, typeof Obj);
+	var obj = {};
+	obj.proto = Obj; // РЎРѕР·РґР°РµРј РЅРѕРІС‹Р№ РѕР±СЉРµРєС‚ РЅР° РѕСЃРЅРѕРІРµ Obj
+	//console.log( obj);
+	// РћР±СЂР°Р±Р°С‚С‹РІР°РµРј РЅР°Р»РёС‡РёРµ Р·Р°РґР°РЅРЅС‹С… СЂР°СЃС€РёСЂРµРЅРёР№ РѕР±СЉРµРєС‚Р°, РїСЂРё РёС… РЅР°Р»РёС‡РёРё
+	if (extProp || 1 !== 1) {
+		var Properties = Object(extProp);
+		for (var prop in Properties) {
+			if (hasOwn.call(Properties, prop)) {
+				obj[prop] = Properties[prop];
+			}
+		}
+	}
+	return obj;
 };
 
-var tstObj = newObject( {w:123});
-console.log( "tstObj = %o", tstObj.proto);
-console.dir( tstObj);
+var tstObj = newObject({
+		w : 123
+	});
+console.log("tstObj = %o", tstObj.proto);
+console.dir(tstObj);
