@@ -12,7 +12,7 @@ const newObject = function (Obj, extProp) {
 	//  цитируем  системный функционал Object.prototype.hasOwnProperty
 	var hasOwn = Object.prototype.hasOwnProperty;
 	// 1. Проверяем, что первый аргумент
-	if (typeof Obj != 'object') {
+	if (typeof Obj !== 'object') {
 		throw TypeError('Object prototype may only be an Object or null');
 	}
 	//console.log( Obj, typeof Obj);
