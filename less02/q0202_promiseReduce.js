@@ -3,7 +3,6 @@
 // an arguments, and returns a promise with result of chain of given promises.
 // promiseReduce([promise1, promise2]) // => promise1.then(promise2);
 // 
-// https://decembersoft.com/posts/promises-in-serial-with-array-reduce/
 //
 
 /*
