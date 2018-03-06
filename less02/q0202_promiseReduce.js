@@ -20,31 +20,27 @@ var promise0 = Promise.resolve(0),
 
 
 */
-function sumFn(aResults, pInit) {
-  return aResults.reduce((prev, item) => prev + item, pInit);
-}
 
-// console.log('sumFn = %s ', sumFn([1, 2, 3, 5, 6], 100));
+var sumFn = function (a, b) {
+    return a.reduce((promiseChain, currentTask) => {
+        return promiseChain.then(chainResults =>
+          currentTask.then(currentResult => 
+               currentResult
+          )
+        );
+   }, Promise.resolve(b))
+   .catch(err =>  console.log("Error: %s", err));
+}  
 
 function promiseReduce(tasks, sumFn, nInit) {
-
-  return tasks.reduce((promiseChain, currentTask) => {
-    return promiseChain.then(chainResults =>
-      currentTask.then(currentResult => 
-          [...chainResults, currentResult]
-      )
-    
-    );
-  }, Promise.resolve([])).then(
-    arrayOfResults => sumFn(arrayOfResults, nInit)
-  );
-
-
+    return sumFn(tasks, nInit);
 }
 
 var promise0 = Promise.resolve(0),
+    promise111 = Promise.reject(111), 
     promise1 = Promise.resolve(1),
     promise2 = Promise.resolve(2);
 
   promiseReduce([promise0, promise1, promise2], sumFn, 0).then(res => console.log(res));
-  
+
+  promiseReduce([promise0, promise111, promise2], sumFn, 0).then(res => console.log(res));
