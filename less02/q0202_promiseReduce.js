@@ -12,16 +12,22 @@
  и выполнять reduce-функцию для каждого итогового значения (по аналогии с reduce).
 
 var promise0 = Promise.resolve(0),
-    promise1 = Promise.resolve(1),
-    promise2 = Promise.resolve(2);
+	promise1 = Promise.resolve(1),
+	promise2 = Promise.resolve(2)
 
-	promiseReduce([promise0, promise1, promise2], sumFn, 0).then(res => console.log(res));
-	// => 2
-
+promiseReduce(
+			[promise0, promise1, promise2], 
+			(a, b) => a + b, 
+			0
+			)
+			.then(res => console.log(res)) // 3
 
 */
 
-var sumFn = function (a, b) {
+
+var sumFn111 = function (a, b) {
+
+
     return a.reduce((promiseChain, currentTask) => {
         return promiseChain.then(chainResults =>
           currentTask.then(currentResult => 
@@ -33,14 +39,22 @@ var sumFn = function (a, b) {
 }  
 
 function promiseReduce(tasks, sumFn, nInit) {
-    return sumFn(tasks, nInit);
+	return tasks.reduce((promiseChain, currentTask) => {
+		return promiseChain.then(chainResults =>
+		  currentTask.then( currentResult =>
+			sumFn( chainResults, currentResult) 
+		  )
+		);
+   }, Promise.resolve(nInit))
+   .catch(err =>  console.log("Error: %s", err));
+	
+    //return sumFn(tasks, nInit);
 }
 
 var promise0 = Promise.resolve(0),
-    promise111 = Promise.reject(111), 
     promise1 = Promise.resolve(1),
     promise2 = Promise.resolve(2);
 
-  promiseReduce([promise0, promise1, promise2], sumFn, 0).then(res => console.log(res));
+	
+  promiseReduce([promise0, promise1, promise2], (a, b) => a + b , 0).then(res => console.log(res));
 
-  promiseReduce([promise0, promise111, promise2], sumFn, 0).then(res => console.log(res));
