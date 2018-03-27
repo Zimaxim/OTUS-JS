@@ -1,0 +1,12 @@
+{
+  "name": "less04",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error 000: no test specified\" && exit 1",
+    "tree": "node ./tree.js "
+  },
+  "author": "",
+  "license": "ISC"
+}
