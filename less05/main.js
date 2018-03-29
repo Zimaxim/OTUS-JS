@@ -1,3 +1,11 @@
+/*
+Написать приложение для работы со стримами: 
+Readable, генерирующий случайные числа, 
+Transformable, добавляющий случайное число к первому и 
+Writable, выводящий в консоль данные.
+Данные должны “течь” readable -> transformable -> writable
+Используйте highWaterMark для примера ограничения внутреннего буффера.
+*/
 
 'use strict';
 const Reader = require('./reader.js');
