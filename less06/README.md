@@ -1,4 +1,4 @@
-# RSS graber
+# RSS saver
 
 Application request RSS, convert XML to JSON and save into MongoDB.
 
