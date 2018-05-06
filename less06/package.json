@@ -1,0 +1,13 @@
+{
+  "private": true,
+  "name": "less06",
+  "version": "0.6.7",
+  "scripts": {
+   "start" : "node saveRSS.js"
+  },
+  "dependencies": {
+    "cheerio": "*",
+    "mongodb": "^3.0.4",
+    "iconv-lite": "*"
+  }
+}
